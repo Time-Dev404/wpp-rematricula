@@ -1,0 +1,23 @@
+version: '3.7'
+
+services: 
+  
+    database-postgres:
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: docker
+            POSTGRES_DB: rematricula
+        ports:
+            - 5432:5432
+        
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8081:8081
+    
+    redis:
+        image: "redis:alpine"
+        ports:
+            - 6379:6379
