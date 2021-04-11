@@ -9,9 +9,9 @@ venom
   });
 
 function start(client) {
-  client.onMessage((message) => {
+  client.onMessage(async (message) => {
     if (message.isGroupMsg === false) {
-      const response = messageSwitch(client, message)
+      const response = await messageSwitch(client, message)
       client
         .sendText(message.from, response)
         .then((result) => {
