@@ -1,7 +1,11 @@
 import {saveInCache} from './database/cache';
-import msg_save_student_cpf from './messages/msg_save_student_cpf';
-import msg_save_student_name from './messages/msg_save_student_name';
-import msg_save_student_address from './messages/msg_save_student_address';
+import {
+  msg_save_student_cpf,
+  msg_save_student_name,
+  msg_save_student_address,
+  msg_save_student_city,
+  msg_save_student_email
+} from './messages';
 
 export default async (client, message, cachedMessage) => {
 
@@ -19,6 +23,14 @@ export default async (client, message, cachedMessage) => {
 
     case "set_address_student":
       mesg = await msg_save_student_address(client, message);
+      return mesg;
+
+    case "set_city_student":
+      mesg = await msg_save_student_city(client, message);
+      return mesg;
+
+    case "set_email_student":
+      mesg = await msg_save_student_email(client, message);
       return mesg;
 
     case "rematricula":
