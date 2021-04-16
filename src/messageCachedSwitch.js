@@ -4,7 +4,10 @@ import {
   msg_save_student_name,
   msg_save_student_address,
   msg_save_student_city,
-  msg_save_student_email
+  msg_save_student_email,
+  msg_get_classes_by_course,
+  msg_get_subjects_by_class,
+  msg_save_student_registration
 } from './messages';
 
 export default async (client, message, cachedMessage) => {
@@ -21,6 +24,10 @@ export default async (client, message, cachedMessage) => {
         mesg = await msg_save_student_name(client, message);
         return mesg;
 
+    case "set_registration_student":
+      mesg = await msg_save_student_registration(client, message);
+      return mesg;
+
     case "set_address_student":
       mesg = await msg_save_student_address(client, message);
       return mesg;
@@ -31,6 +38,14 @@ export default async (client, message, cachedMessage) => {
 
     case "set_email_student":
       mesg = await msg_save_student_email(client, message);
+      return mesg;
+
+    case "set_course_student":
+      mesg = await msg_get_classes_by_course(client, message);
+      return mesg;
+
+    case "set_class_student":
+      mesg = await msg_get_subjects_by_class(client, message);
       return mesg;
 
     case "rematricula":
