@@ -12,16 +12,18 @@ export default async (client, message) => {
   const isValid = await schema.isValid(message);
 
   if(!isValid){
-    await saveInCache(message.from, "set_name_student");
+    await saveInCache(message.from, "set_name_responsible");
     return "Desculpa, você inseriu um nome inválido. Tente novamente."
   }
 
   try {
     const cpf = await getFromCache(`${message.from}_cpf`);
+
+    const student = await connection('students').where({cpf: cpf}).select("id").first();
     
-    await connection('students').where({cpf: cpf}).update({name: message.body});
-    await saveInCache(message.from, "set_registration_student");
-    return `Que nome lindo, ${message.body.split(" ")[0]}! Agora me informe sua matrícula`;
+    await connection('responsibles').insert({name: message.body, student_id: student.id});
+    await saveInCache(message.from, "set_cpf_responsible");
+    return `Muito bom. Agora me informe o cpf de ${message.body.split(" ")[0]}`;
   } catch (error) {
     console.log("erro :( ", error);
     return `Que pena. Parece que houve um erro. Tenta continuar mais tarde, tá bom?!`;

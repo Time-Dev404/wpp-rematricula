@@ -1,6 +1,21 @@
 import connection from '../database';
+import * as Yup from 'yup';
 import {getFromCache, saveInCache} from '../database/cache';
 export default async (client, message) => {
+
+  message.body = message.body.replace(/\D/gim, '').trim();
+
+  let schema = Yup.object().shape({
+    body: Yup.number().required()
+  });
+
+  const isValid = await schema.isValid(message);
+
+  if(!isValid){
+    await saveInCache(message.from, "set_class_student");
+    return "Que pena, o valor que você me enviou não é válido. Tenta me enviar de novo."
+  }
+
   try {
     // const cpf = await getFromCache(`${message.from}_cpf`);
     // await connection('students').where({cpf: cpf}).update({email: message.body});
@@ -21,7 +36,8 @@ export default async (client, message) => {
 
     await saveInCache(message.from, "set_confirm_student");
     await saveInCache(`${message.from}_class`, message.body);
-    return `Então, essas serão suas disciplinas para esse semestre: ${text}`;
+    return `Então, essas serão suas disciplinas para esse semestre: ${text}
+Você confirma finalizar sua rematrícula?`;
   } catch (error) {
     console.log("erro :( ", error);
     return `Que pena. Parece que houve um erro. Tenta continuar mais tarde, tá bom?!`;

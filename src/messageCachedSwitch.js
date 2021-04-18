@@ -2,12 +2,17 @@ import {saveInCache} from './database/cache';
 import {
   msg_save_student_cpf,
   msg_save_student_name,
+  msg_save_student_registration,
   msg_save_student_address,
   msg_save_student_city,
   msg_save_student_email,
   msg_get_classes_by_course,
   msg_get_subjects_by_class,
-  msg_save_student_registration
+  msg_save_responsible_name,
+  msg_save_responsible_cpf,
+  msg_save_responsible_rg,
+  msg_save_responsible_phone,
+  msg_save_student_subjects
 } from './messages';
 
 export default async (client, message, cachedMessage) => {
@@ -40,13 +45,34 @@ export default async (client, message, cachedMessage) => {
       mesg = await msg_save_student_email(client, message);
       return mesg;
 
+    case "set_name_responsible":
+      mesg = await msg_save_responsible_name(client, message);
+      return mesg;
+
+    case "set_cpf_responsible":
+      mesg = await msg_save_responsible_cpf(client, message);
+      return mesg;
+
+    case "set_rg_responsible":
+      mesg = await msg_save_responsible_rg(client, message);
+      return mesg;
+
+    case "set_phone_responsible":
+      mesg = await msg_save_responsible_phone(client, message);
+      return mesg;
+
     case "set_course_student":
       mesg = await msg_get_classes_by_course(client, message);
       return mesg;
-
+  
     case "set_class_student":
       mesg = await msg_get_subjects_by_class(client, message);
       return mesg;
+
+    case "set_confirm_student":
+      mesg = await msg_save_student_subjects(client, message);
+      return mesg;
+
 
     case "rematricula":
       saveInCache(message.from, 'set_cpf_student')
