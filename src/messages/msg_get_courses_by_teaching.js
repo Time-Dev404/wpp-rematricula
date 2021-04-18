@@ -27,7 +27,7 @@ export default async (client, message) => {
     });
 
     await saveInCache(message.from, "set_teaching_student");
-    return `Tudo bem. Me diz agora qual dessas é a sua modalidade de ensino:${text}`;
+    return `Tudo bem. Me diz agora qual dessas é a sua modalidade de ensino: ${text}`;
   } catch (error) {
     console.log("erro :( ", error);
     return `Que pena. Parece que houve um erro. Tenta continuar mais tarde, tá bom?!`;
