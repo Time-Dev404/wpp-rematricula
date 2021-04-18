@@ -23,6 +23,16 @@ export default async (client, message) => {
 
 
     await saveInCache(message.from, "set_name_responsible");
+
+    client
+        .sendText(message.from, "Muito bem, agora vou precisar que me informe os dados do seu responsável. Vamos lá!")
+        .then((result) => {
+          console.log('Result: ', result); //return object success
+        })
+        .catch((erro) => {
+          console.error('Error when sending: ', erro); //return object error
+        });
+
     return `Me informe o nome do seu responsável.`;
   } catch (error) {
     console.log("erro :( ", error);

@@ -25,6 +25,7 @@ export default async (client, message) => {
     return `Ótimo. Agora me informe seu nome completo`;
   } catch (error) {
     console.log("erro :( ", error);
-    return `Que pena. Parece que você já fez sua rematrícula`;
+    await saveInCache(message.from, "set_cpf_student");
+    return `Que pena. Parece que você já fez sua rematrícula. Tente enviar o cpf novamente.`;
   }
 }

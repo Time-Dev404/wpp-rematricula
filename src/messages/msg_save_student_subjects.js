@@ -4,7 +4,8 @@ export default async (client, message) => {
   try {
     
     await removeFromCache(message.from);
-    await saveInCache(`${message.from}_class`, message.body);
+    await removeFromCache(`${message.from}_cpf`);
+    await removeFromCache(`${message.from}_class`);
     return `Muito bem, você concluiu sua rematrícula!`;
   } catch (error) {
     console.log("erro :( ", error);

@@ -36,8 +36,7 @@ export default async (client, message) => {
 
     await saveInCache(message.from, "set_confirm_student");
     await saveInCache(`${message.from}_class`, message.body);
-    return `Então, essas serão suas disciplinas para esse semestre: ${text}
-Você confirma finalizar sua rematrícula?`;
+    return `Que legal, está tudo certo com seu cadastro. Você confirma finalizar sua rematrícula?`;
   } catch (error) {
     console.log("erro :( ", error);
     return `Que pena. Parece que houve um erro. Tenta continuar mais tarde, tá bom?!`;
