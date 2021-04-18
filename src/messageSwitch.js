@@ -21,7 +21,7 @@ module.exports = async (client, message) => {
         return msg;
       }else {
         removeFromCache(message.from);
-      return "Olá, seja bem vindo! Sou o assistente virtual do IFMA - Santa inês. Hoje, vou ajudar você a fazer sua rematrícula (caso já seja um de nossos alunos) ou sua matrícula (caso esteja ingressando agora). Para dar início à nossa jornada, digite *rematricula*"
+      return "Olá, seja bem vindo! Sou o AVIME. Hoje, vou ajudar você a fazer sua rematrícula (caso já seja um de nossos alunos) ou sua matrícula (caso esteja ingressando agora). Para dar início à nossa jornada, digite *rematricula*"
       }
     }
 }
