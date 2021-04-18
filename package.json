@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "sucrase-node index.js"
+    "prestart": "npx knex migrate:latest && npx knex seed:run",
+    "start": "sucrase-node index.js"
   },
   "keywords": [],
   "author": "",
