@@ -8,6 +8,7 @@ module.exports = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSOWRD,
     database: process.env.DB,
+    rejectUnauthorized: false,
     ssl: true
   },
   migrations: {
