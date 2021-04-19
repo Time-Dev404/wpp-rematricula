@@ -39,6 +39,6 @@ export default async (client, message) => {
     return `Tudo bem. Me diz agora qual a sua turma: ${text}`;
   } catch (error) {
     console.log("erro :( ", error);
-    return `Que pena. Parece que houve um erro. Tenta continuar mais tarde, tá bom?!`;
+    return `Que pena. Parece que houve um erro. Tenta continuar mais tarde, tá bom?`;
   }
 }
