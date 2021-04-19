@@ -2,7 +2,12 @@ const venom = require('venom-bot');
 const messageSwitch = require('./src/messageSwitch');
 
 venom
-  .create()
+  .create({
+    puppeteerOptions: {
+      headless: true,
+    },
+    browserArgs: ['--no-sandbox', '--disable-setuid-sandbox']
+  })
   .then((client) => start(client))
   .catch((erro) => {
     console.log(erro);
