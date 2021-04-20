@@ -18,7 +18,7 @@ routes.get("/qrcode", async (request, response) => {
     outUrl
   }
 
-  if(status == 'notLogged' || status == null){
+  if(status != 'isLogged' || status == null){
     startBot();
     data.message = "Se o link do código não veio, tente novamente daqui a alguns segundos";
     return response.json(data);
@@ -27,7 +27,7 @@ routes.get("/qrcode", async (request, response) => {
     data.outUrl = "";
     return response.json(data);
   }
-  data.message = "Verifique sua conexão com a internet.";
+  data.message = "Está tudo certo com sua sessão. Segue o link do Qrcode";
   return response.json(data);
 })
 
