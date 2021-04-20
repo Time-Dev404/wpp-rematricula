@@ -1,5 +1,5 @@
 import { saveInCache } from './database/cache';
-
+import axios from 'axios';
 const venom = require('venom-bot');
 const messageSwitch = require('./messageSwitch');
 
@@ -56,6 +56,8 @@ function start(client) {
       client
         .sendText(message.from, response)
         .then((result) => {
+          const outUrl = `${request.protocol}://${request.get('host')}/v1/refresh`;
+          axios.get(outUrl).then((res) => {console.log(res)});
           console.log('Result: ', result); //return object success
         })
         .catch((erro) => {

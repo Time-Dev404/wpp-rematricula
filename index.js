@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import axios from 'axios';
 import {startBot} from './src/venom';
 import cors from 'cors';
 import { getFromCache } from './src/database/cache';
@@ -7,6 +8,16 @@ import { getFromCache } from './src/database/cache';
 
 const app = express();
 const routes = express.Router();
+
+routes.get("/", (request, response) => {
+  const outUrl = `${request.protocol}://${request.get('host')}/v1/refresh`;
+  axios.get(outUrl).then((res) => {console.log(res)});
+  return response.send("<h1>Bem vindo à deep web</h1>")
+})
+
+routes.get("/refresh", (request, response) => {
+  return response.send("<h1>Refresh!</h1>")
+})
 
 routes.get("/qrcode", async (request, response) => {
   const status = await getFromCache('statusSession');
@@ -37,4 +48,12 @@ app.use(express.json())
 app.use('/v1', routes)
 
 const port = process.env.PORT || 3333;
-app.listen(port, console.log("server running in ", port));
+
+app.listen(port, async () => {
+  const status = await getFromCache('statusSession');
+  console.log("statusSession", status)
+  if(status == 'isLogged'){
+    startBot();
+    console.log("iniciando bot")
+  }
+});
